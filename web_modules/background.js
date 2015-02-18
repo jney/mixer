@@ -1,7 +1,7 @@
 'use strict';
 
-var $ = require('jquery/dist/jquery');
-var _ = require('lodash/index');
+var $ = require('jquery');
+var _ = require('lodash');
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function() {

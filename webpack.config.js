@@ -19,7 +19,12 @@ module.exports = {
             path.resolve('node_modules'),
             path.resolve('web_modules')
         ],
-        extensions: ['', '.js']
+        extensions: ['', '.js'],
+        alias: {
+            jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery.js'),
+            react: path.join(__dirname, 'node_modules/react/addons.js'),
+            lodash: path.join(__dirname, 'node_modules/lodash/index.js')
+        }
     }/*,
     devtool: 'source-map'*/
 };

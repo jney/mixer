@@ -4,12 +4,12 @@
 
 'use strict';
 
-var $ = require('jquery/dist/jquery');
+var $ = require('jquery');
 
 var optionsUrl = chrome.extension.getURL('views/options.html');
 var $a = $('<a/>', {
     href: optionsUrl,
     target: '_blank'
-}).html('mixer page');
+}).html('click here to use the mixer');
 
 $('body').append($a);

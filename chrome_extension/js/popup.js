@@ -50,19 +50,18 @@
 
 	'use strict';
 
-	var $ = __webpack_require__(2);
+	var $ = __webpack_require__(1);
 
 	var optionsUrl = chrome.extension.getURL('views/options.html');
 	var $a = $('<a/>', {
 	    href: optionsUrl,
 	    target: '_blank'
-	}).html('mixer page');
+	}).html('click here to use the mixer');
 
 	$('body').append($a);
 
 /***/ },
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
