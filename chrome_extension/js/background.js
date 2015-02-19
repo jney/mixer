@@ -57,9 +57,10 @@
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	    if(request.cmd === 'video_detected'){
 	        console.log('on message video_detected');
-	        sendResponse(true);
-	        // return true from the event listener to indicate we wish to send a response asynchronously
-	        // return true;
+	        console.log(sender);
+	        sendResponse({
+	            'playbackRate': 3
+	        });
 	    }
 	});
 
@@ -20521,12 +20522,14 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module), (function() { return this; }())))
 
 /***/ },
 /* 3 */,
 /* 4 */,
-/* 5 */
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module) {

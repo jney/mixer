@@ -11,8 +11,9 @@ chrome.runtime.onInstalled.addListener(function() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     if(request.cmd === 'video_detected'){
         console.log('on message video_detected');
-        sendResponse(true);
-        // return true from the event listener to indicate we wish to send a response asynchronously
-        // return true;
+        console.log(sender);
+        sendResponse({
+            'playbackRate': 3
+        });
     }
 });
