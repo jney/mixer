@@ -19,7 +19,8 @@ var Vinyl = React.createClass({
 var coverStyle = {
   borderRadius: '50%',
   height: '100%',
-  width: '100%',
+  width: '100%'
+
 };
 
 var lightStyle = {

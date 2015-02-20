@@ -21,7 +21,9 @@ module.exports = {
     // modules dir
     root: [
       path.resolve('node_modules'),
-      path.resolve('web_modules')
+      path.resolve('web_modules'),
+      path.resolve('sass')
+
     ],
     // allowed extensions
     extensions: ['', '.js', '.jsx'],
