@@ -7,14 +7,17 @@ var command = require('video/command');
 
 $(function(){
     var player;
-    if($('.html5-video-container').length > 0){
-        player = $('.html5-main-video').get(0);
+    if($('video').length > 0){
+        player = $('video').get(0);
 
         // on video detected
         chrome.runtime.sendMessage({
-            cmd: 'video_detected'
+            cmd: 'track_detected',
+            track: {
+                image: 'http://img.youtube.com/vi/jUstsqkRLeY/hqdefault.jpg'
+            }
         }, function(ret){
-            command.execute(ret, player);
+            //command.execute(ret, player);
         });
     }
 });

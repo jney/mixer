@@ -2,6 +2,10 @@
 
 var React = require('react');
 
+/**
+ * @props track
+ * @type {*|Function}
+ */
 var Vinyl = React.createClass({
   render: function(){
     return (
@@ -9,7 +13,7 @@ var Vinyl = React.createClass({
         <div className="grooves"></div>
         <div style={lightStyle}></div>
         <div style={macaronStyle}>
-          <img style={coverStyle} src={this.props.image} />
+          <img style={coverStyle} src={this.props.track.image} />
         </div>
       </div>
     );

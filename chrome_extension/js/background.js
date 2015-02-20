@@ -46,8 +46,10 @@
 
 	'use strict';
 
-	var $ = __webpack_require__(1);
-	var _ = __webpack_require__(2);
+	var $ = __webpack_require__(2);
+	var _ = __webpack_require__(3);
+
+	var tracks = [];
 
 	// executed at the extension installation
 	chrome.runtime.onInstalled.addListener(function() {
@@ -55,17 +57,23 @@
 	});
 
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-	    if(request.cmd === 'video_detected'){
-	        console.log('on message video_detected');
+	    if(request.cmd === 'track_detected'){
+	        console.log('on message track_detected');
 	        console.log(sender);
-	        sendResponse({
-	            'playbackRate': 3
+	        sendResponse();
+	        tracks.push(request.track);
+	        chrome.runtime.sendMessage({
+	            cmd: 'update_option_view',
+	            tracks: tracks
 	        });
 	    }
 	});
 
+
+
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9276,7 +9284,7 @@
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -20525,7 +20533,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module), (function() { return this; }())))
 
 /***/ },
-/* 3 */,
 /* 4 */,
 /* 5 */,
 /* 6 */,

@@ -40,35 +40,57 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by nicolasmondon on 16/02/15.
 	 */
 
-	var $ = __webpack_require__(1);
-	var command = __webpack_require__(168);
+	var $ = __webpack_require__(2);
+	var command = __webpack_require__(1);
 
 	$(function(){
 	    var player;
-	    if($('.html5-video-container').length > 0){
-	        player = $('.html5-main-video').get(0);
+	    if($('video').length > 0){
+	        player = $('video').get(0);
 
 	        // on video detected
 	        chrome.runtime.sendMessage({
-	            cmd: 'video_detected'
+	            cmd: 'track_detected',
+	            track: {
+	                image: 'http://img.youtube.com/vi/jUstsqkRLeY/hqdefault.jpg'
+	            }
 	        }, function(ret){
-	            command.execute(ret, player);
+	            //command.execute(ret, player);
 	        });
 	    }
 	});
 
 /***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 1:
+	'use stritct';
+
+	module.exports = {
+	    /**
+	     * execute a set of cmd in a player
+	     * @param cmd
+	     * @param player
+	     */
+	    execute: function(cmd, player){
+	        var key;
+	        for(key in cmd){
+	            player[key] = cmd[key];
+	        }
+	    }
+	};
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9278,28 +9300,5 @@
 	}));
 
 
-/***/ },
-
-/***/ 168:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use stritct';
-
-	module.exports = {
-	    /**
-	     * execute a set of cmd in a player
-	     * @param cmd
-	     * @param player
-	     */
-	    execute: function(cmd, player){
-	        var key;
-	        for(key in cmd){
-	            player[key] = cmd[key];
-	        }
-	    }
-	};
-
-
 /***/ }
-
-/******/ })
+/******/ ])
