@@ -6,37 +6,34 @@
 
 var $ = require('jquery');
 var command = require('content/command');
-var retrieveId = require('content/retrieve-id');
+var retrieveData = require('content/retrieve-data');
 
 
 $(function () {
+    var player;
     var track;
 
     if ($('video').length > 0) {
 
-        track = $('video').get(0);
+        player = $('video').get(0);
 
-        // first
-        var listenerCreation = track.addEventListener('play', function () {
-            // put the track on pause at the currentTime 0
-            // send an event
-            // and destroy the listener
-            // on video detected
+        // creation
+        player.addEventListener('canplay', function () {
+            // notify the background to add a new track
             chrome.runtime.sendMessage({
-                cmd: 'track_detected',
-                track: {
-                    image: 'http://img.youtube.com/vi/jUstsqkRLeY/hqdefault.jpg'
-                }
+                cmd: 'player_detected',
+                player: retrieveData(player)
+            }, function(ret){
+                track = ret;
+                alert('track created');
             });
         }, false);
 
+
         // time udate
-        track.addEventListener('timeupdate', function () {
+        player.addEventListener('timeupdate', function () {
             // send an event
         }, false);
-
-
-
 
     }
 });

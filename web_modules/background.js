@@ -3,13 +3,7 @@
 var $ = require('jquery');
 var _ = require('lodash');
 
-var tracks = [{
-    image: '// image',
-    tab: '// tab',
-    duration: '//',
-    volume: 0,
-    currentTime: 0
-}];
+var tracks = [];
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function() {
@@ -17,15 +11,26 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-    if(request.cmd === 'track_detected'){
-        console.log('on message track_detected');
+    if(request.cmd === 'player_detected'){
         console.log(sender);
         sendResponse();
-        tracks.push(request.track);
+
+        // a player
+        console.log(cmd.player);
+
+        // we create a new track in function of the player datas and tab
+        var newTrack = {
+
+        };
+
+        // send the tracks to the options view
         chrome.runtime.sendMessage({
             cmd: 'update_option_view',
             tracks: tracks
         });
+
+        // send created track to the current tab
+        sendResponse(newTrack);
     }
 });
 
