@@ -22,7 +22,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["https://www.youtube.com/*"],
       "js": ["js/content.js"],
       "run_at": "document_start"
     }

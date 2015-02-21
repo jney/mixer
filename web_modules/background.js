@@ -3,7 +3,13 @@
 var $ = require('jquery');
 var _ = require('lodash');
 
-var tracks = [];
+var tracks = [{
+    image: '// image',
+    tab: '// tab',
+    duration: '//',
+    volume: 0,
+    currentTime: 0
+}];
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function() {
