@@ -2,6 +2,8 @@
 
 var React = require('react');
 
+require('components/vinyl.scss');
+
 /**
  * @props track
  * @type {*|Function}

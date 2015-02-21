@@ -22,11 +22,10 @@ module.exports = {
     root: [
       path.resolve('node_modules'),
       path.resolve('web_modules'),
-      path.resolve('sass')
-
+      path.resolve('sass'),
     ],
     // allowed extensions
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.scss'],
     // alias for vendors
     alias: {
       jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery.js'),
@@ -41,6 +40,11 @@ module.exports = {
       {
         test: /\.jsx$/,
         loader: 'jsx-loader'
+      },
+      {
+        test: /\.scss$/,
+        // Passing indentedSyntax query param to node-sass
+        loader: 'style!css!sass?outputStyle=expanded'
       }
     ]
   }
