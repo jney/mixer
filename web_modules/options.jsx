@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Playlist = require('components/Playlist');
 var Vinyl = require('components/Vinyl');
 
 // FIXME
@@ -10,5 +11,10 @@ var tmpTack = {
 
 React.render(
     <Vinyl track={tmpTack} />,
-    document.body
+    document.querySelector('.console')
+);
+
+React.render(
+    <Playlist tracks={[]} />,
+    document.querySelector('.playlist')
 );
