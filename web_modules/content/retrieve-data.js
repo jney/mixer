@@ -12,7 +12,7 @@ function parseParams(str) {
     }, {});
 }
 
-module.exports = function(player){
+module.exports = function(player ){
     return {
         id: parseParams(window.location.search.slice(1)),
         image: $('meta[property="og:image"]').attr('content')
