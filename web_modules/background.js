@@ -12,8 +12,10 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 // new player detected
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender) {
   if (request.cmd === 'player_detected') {
+
+    console.log('player detected', request.player);
 
     // we create a new track in function of the player datas and tab
     var newTrack = _.extend({}, request.player, {
@@ -23,7 +25,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       loop: true,
       pause: true,
       play: false,
-      playbackRate: 1
+      playbackRate: 0
     });
 
     // send created track to the current tab
