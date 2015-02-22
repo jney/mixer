@@ -7,30 +7,45 @@ var tracks = [];
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function() {
+    tracks = [];
     console.log('on installed');
 });
 
+// new player detected
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     if(request.cmd === 'player_detected'){
-        console.log(sender);
-        sendResponse();
-
-        // a player
-        console.log(cmd.player);
 
         // we create a new track in function of the player datas and tab
-        var newTrack = {
-
-        };
-
-        // send the tracks to the options view
-        chrome.runtime.sendMessage({
-            cmd: 'update_option_view',
-            tracks: tracks
+        var newTrack = _.extend({}, request.player, {
+            tab: sender.tab.id,
+            volume: 1,
+            currentTime: 0,
+            loop: true,
+            pause: true,
+            play: false,
+            playbackRate: 1
         });
 
         // send created track to the current tab
-        sendResponse(newTrack);
+        notifyTab(newTrack);
+
+        // send the tracks to the options view
+        notifyOptionsView(tracks);
     }
 });
+
+function notifyTab(track){
+    console.log('tab id', track.tab);
+    chrome.tabs.sendMessage(track.tab, {
+        cmd: 'update_track',
+        track: track
+    });
+};
+
+function notifyOptionsView(tracks){
+    chrome.runtime.sendMessage({
+        cmd: 'update_option_view',
+        tracks: tracks
+    });
+};
 

@@ -8,29 +8,38 @@ var $ = require('jquery');
 var command = require('content/command');
 var retrieveData = require('content/retrieve-data');
 
+var player;
+var track;
 
+// wait for dom ready
 $(function () {
-    var player;
-    var track;
 
     if ($('video').length > 0) {
 
         player = $('video').get(0);
 
-        // creation
-        player.addEventListener('canplay', function () {
-            // notify the background to add a new track
+        // on creation
+        // we send an event to the bg with a player
+        // and receive a track in return
+        var firstCanPlayListener = player.addEventListener('canplay', function () {
+            console.log('canplay');
             chrome.runtime.sendMessage({
                 cmd: 'player_detected',
                 player: retrieveData(player)
-            }, function(ret){
-                track = ret;
-                alert('track created');
             });
+            player.removeEventListener('canplay', firstCanPlayListener);
         }, false);
 
+        // update a track
+        chrome.runtime.onMessage.addListener(function(request){
+            if(request.cmd === 'update_track'){
+                console.log('update a track');
+                track = request.track;
+                command.execute(track, player);
+            }
+        });
 
-        // time udate
+        // on time udate
         player.addEventListener('timeupdate', function () {
             // send an event
         }, false);
