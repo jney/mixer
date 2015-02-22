@@ -22,15 +22,20 @@ $(function () {
         // we send an event to the bg with a player
         // and receive a track in return
         player.addEventListener('canplay', function () {
+            console.log('toto');
             chrome.runtime.sendMessage({
                 cmd: 'player_detected',
                 player: retrieveData(player)
-            }, function(t){
-                track = t;
-                command.execute(track, player);
             });
         }, false);
 
+        // update a track
+        chrome.runtime.onMessage.addListener(function(request){
+            if(request.cmd === 'update_track'){
+                track = request.track;
+                command.execute(track, player);
+            }
+        });
 
         // on time udate
         player.addEventListener('timeupdate', function () {

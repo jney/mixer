@@ -14,11 +14,10 @@ chrome.runtime.onInstalled.addListener(function() {
 // new player detected
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     if(request.cmd === 'player_detected'){
-        console.log(sender);
 
         // we create a new track in function of the player datas and tab
         var newTrack = _.extend({}, request.player, {
-            tab: sender.id,
+            tab: sender.tab.id,
             volume: 1,
             currentTime: 0,
             loop: true,
@@ -27,16 +26,26 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
             playbackRate: 1
         });
 
-        console.log(newTrack);
-
         // send created track to the current tab
-        sendResponse(newTrack);
+        notifyTab(newTrack);
 
         // send the tracks to the options view
-        chrome.runtime.sendMessage({
-            cmd: 'update_option_view',
-            tracks: tracks
-        });
+        notifyOptionsView(tracks);
     }
 });
+
+function notifyTab(track){
+    console.log('tab id', track.tab);
+    chrome.tabs.sendMessage(track.tab, {
+        cmd: 'update_track',
+        track: track
+    });
+};
+
+function notifyOptionsView(tracks){
+    chrome.runtime.sendMessage({
+        cmd: 'update_option_view',
+        tracks: tracks
+    });
+};
 
