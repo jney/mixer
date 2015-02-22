@@ -44,22 +44,22 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  }
+}
 
-  &:after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 6;
-    display: block;
-    margin: -4% 0 0 -4%;
-    width: 8%;
-    height: 8%;
-    border-radius: 50%;
-    background: white;
-    box-shadow: inset 0 0 2px #000;
-    content: '';
-  }
+.vinyl__macaron__cover:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 6;
+  display: block;
+  margin: -4% 0 0 -4%;
+  width: 8%;
+  height: 8%;
+  border-radius: 50%;
+  background: white;
+  box-shadow: inset 0 0 2px #000;
+  content: '';
+}
 
 .vinyl__grooves {
   position: absolute;
@@ -86,7 +86,7 @@
 .is-playing .vinyl__grooves,
 .is-playing .vinyl__macaron,
 .is-playing .vinyl__macaron__cover {
-  animation: rotation 4s infinite linear;
+  animation: rotation 3s infinite linear;
 }
 
 .is-paused .vinyl__grooves,
@@ -102,12 +102,13 @@
   margin: 0;
   width: 100%;
   height: 100%;
-  &:after {
-    margin: -1.25% 0 0 -1.25%;
-    width: 2.5%;
-    height: 2.5%;
-    background: white;
-  }
+}
+
+.vinyl-picture-disc:after {
+  margin: -1.25% 0 0 -1.25%;
+  width: 2.5%;
+  height: 2.5%;
+  background: white;
 }
 
 .song {
@@ -115,9 +116,10 @@
   margin: 50px 50px 0;
   width: 400px;
   text-align: center;
-  audio {
-    display: none;
-  }
+}
+
+.song audio {
+  display: none;
 }
 
 @keyframes rotation {

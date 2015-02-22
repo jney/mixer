@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/madeleineio/mixer",
   "devDependencies": {
+    "autoprefixer-core": "^5.1.7",
     "css-loader": "^0.9.1",
+    "csswring": "^3.0.1",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.3",
     "gulp-rename": "^1.2.0",
@@ -26,8 +28,9 @@
     "jsx-loader": "^0.12.2",
     "less": "^2.4.0",
     "lodash": "^3.0.1",
+    "postcss-import": "^5.0.3",
+    "postcss-loader": "^0.3.0",
     "react": "^0.12.2",
-    "sass-loader": "^0.4.0-beta.1",
     "style-loader": "^0.8.3",
     "url-loader": "^0.5.5",
     "webpack": "^1.5.3"

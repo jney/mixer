@@ -3,6 +3,10 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var autoprefixer = require('autoprefixer-core');
+var csswring = require('csswring');
+var postcssImport = require('postcss-import');
+
 module.exports = {
   context: path.join(__dirname, 'web_modules'),
   // our different entries
@@ -25,7 +29,7 @@ module.exports = {
       path.resolve('sass')
     ],
     // allowed extensions
-    extensions: ['', '.js', '.jsx', '.scss'],
+    extensions: ['', '.js', '.jsx', '.css'],
     // alias for vendors
     alias: {
       jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery.js'),
@@ -42,12 +46,13 @@ module.exports = {
         loader: 'jsx-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         // Passing indentedSyntax query param to node-sass
-        loader: 'style!css!sass?outputStyle=expanded'
+        loader: 'style-loader!css-loader!postcss-loader'
       }
     ]
-  }
+  },
+  postcss: [postcssImport, autoprefixer, csswring]
   /*,
   devtool: 'source-map'*/
 };
