@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var PlayButton = require('./PlayButton');
 var Vinyl = require('./Vinyl');
 
 require('../../css/components/deck.css');
@@ -13,9 +14,15 @@ var tmpTrack = {
 var Deck = React.createClass({
     render: function(){
         return (
-            <div>
-            <Vinyl track={tmpTrack} />
-            <Vinyl track={tmpTrack} />
+            <div className='deck'>
+                <div className='turn-table'>
+                    <Vinyl track={tmpTrack} />
+                    <PlayButton />
+                </div>
+                <div className='turn-table'>
+                    <Vinyl track={tmpTrack} />
+                    <PlayButton />
+                </div>
             </div>
         );
     }

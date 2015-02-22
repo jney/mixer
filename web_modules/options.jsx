@@ -1,8 +1,10 @@
 'use strict';
 
 var React = require('react');
-var Playlist = require('components/Playlist');
+
+// components
 var Deck = require('components/Deck');
+var Playlist = require('components/Playlist');
 
 
 React.render(
