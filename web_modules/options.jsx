@@ -1,16 +1,14 @@
 'use strict';
 
 var React = require('react');
-var Playlist = require('components/Playlist');
-var Vinyl = require('components/Vinyl');
 
-// FIXME
-var tmpTack = {
-    image: chrome.extension.getURL('images/icon48.png'),
-};
+// components
+var Deck = require('components/Deck');
+var Playlist = require('components/Playlist');
+
 
 React.render(
-    <Vinyl track={tmpTack} />,
+    <Deck />,
     document.querySelector('.console')
 );
 
