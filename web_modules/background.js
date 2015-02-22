@@ -36,6 +36,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 
 function notifyTab(track){
     console.log('tab id', track.tab);
+    console.log('track', track);
     chrome.tabs.sendMessage(track.tab, {
         cmd: 'update_track',
         track: track
