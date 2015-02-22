@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/madeleineio/mixer",
   "devDependencies": {
+    "css-loader": "^0.9.1",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.3",
     "gulp-rename": "^1.2.0",
