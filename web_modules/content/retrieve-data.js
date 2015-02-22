@@ -14,7 +14,10 @@ function parseParams(str) {
 
 module.exports = function(player ){
     return {
-        id: parseParams(window.location.search.slice(1)),
-        image: $('meta[property="og:image"]').attr('content')
+        id: parseParams(window.location.search.slice(1)).v,
+        image: $('meta[property="og:image"]').attr('content'),
+        duration: player.duration,
+        begin: 0,
+        end: player.duration
     }
 }

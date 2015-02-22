@@ -1,4 +1,13 @@
-'use stritct';
+'use strict';
+
+var playerAttr = {
+    volume: 'attr',
+    currentTime: 'attr',
+    loop: 'attr',
+    pause: 'function',
+    play: 'function',
+    playbackRate: 'attr'
+};
 
 module.exports = {
     /**
@@ -6,10 +15,16 @@ module.exports = {
      * @param cmd
      * @param player
      */
-    execute: function(cmd, player){
+    execute: function(track, player){
         var key;
-        for(key in cmd){
-            player[key] = cmd[key];
+        for(key in track){
+            if(key in playerAttr){
+                if(playerAttr[key] === 'attr'){
+                    player[key] = track[key];
+                }else if(playerAttr[key] === 'function'){
+                    track[key] && (player[key]());
+                }
+            }
         }
     }
 };
