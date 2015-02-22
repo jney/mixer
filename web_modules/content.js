@@ -25,9 +25,8 @@ $(function () {
     // and receive a track in return
     player.addEventListener('canplay', function firstCanPlayListener() {
       console.log('canplay');
-      player.removeEventListener('canplay', firstCanPlayListener, false);
       window.setTimeout(function () {
-
+        player.removeEventListener('canplay', firstCanPlayListener, false);
         chrome.runtime.sendMessage({
           cmd: 'player_detected',
           player: retrieveData(player)
