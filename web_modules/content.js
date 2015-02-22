@@ -23,11 +23,13 @@ $(function () {
         // and receive a track in return
         var firstCanPlayListener = player.addEventListener('canplay', function () {
             console.log('canplay');
-            chrome.runtime.sendMessage({
-                cmd: 'player_detected',
-                player: retrieveData(player)
-            });
-            player.removeEventListener('canplay', firstCanPlayListener);
+            window.setTimeout(function(){
+                chrome.runtime.sendMessage({
+                    cmd: 'player_detected',
+                    player: retrieveData(player)
+                });
+                player.removeEventListener('canplay', firstCanPlayListener);
+            }, 1000);
         }, false);
 
         // update a track
