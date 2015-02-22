@@ -2,15 +2,11 @@
 
 var React = require('react');
 var Playlist = require('components/Playlist');
-var Vinyl = require('components/Vinyl');
+var Deck = require('components/Deck');
 
-// FIXME
-var tmpTack = {
-    image: chrome.extension.getURL('images/icon48.png'),
-};
 
 React.render(
-    <Vinyl track={tmpTack} />,
+    <Deck />,
     document.querySelector('.console')
 );
 
