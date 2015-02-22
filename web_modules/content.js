@@ -21,17 +21,19 @@ $(function () {
         // on creation
         // we send an event to the bg with a player
         // and receive a track in return
-        player.addEventListener('canplay', function () {
-            console.log('toto');
+        var firstCanPlayListener = player.addEventListener('canplay', function () {
+            console.log('canplay');
             chrome.runtime.sendMessage({
                 cmd: 'player_detected',
                 player: retrieveData(player)
             });
+            player.removeEventListener('canplay', firstCanPlayListener);
         }, false);
 
         // update a track
         chrome.runtime.onMessage.addListener(function(request){
             if(request.cmd === 'update_track'){
+                console.log('update a track');
                 track = request.track;
                 command.execute(track, player);
             }
