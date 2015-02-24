@@ -16,16 +16,21 @@ var Deck = React.createClass({
         return (
             <div className='deck'>
                 <div className='turn-table'>
-                    <Vinyl track={tmpTrack} />
-                    <PlayButton />
+                    <Vinyl play={false} track={null} />
+                    <PlayButton play={false} />
                 </div>
                 <div className='turn-table'>
-                    <Vinyl track={tmpTrack} />
-                    <PlayButton />
+                    <Vinyl play={false} track={null} />
+                    <PlayButton play={false} />
                 </div>
             </div>
         );
-    }
+    },
+    setPlay: function (play) {
+        this.setState({
+            play: play
+        });
+    },
 });
 
 module.exports = Deck;
