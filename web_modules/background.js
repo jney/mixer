@@ -6,13 +6,13 @@ var _ = require('lodash');
 var tracks = [];
 
 // executed at the extension installation
-chrome.runtime.onInstalled.addListener(function () {
+chrome.runtime.onInstalled.addListener(function() {
   tracks = [];
   console.log('on installed');
 });
 
 // new player detected
-chrome.runtime.onMessage.addListener(function (request, sender) {
+chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.cmd === 'player_detected') {
 
     console.log('player detected', request.player);
@@ -43,12 +43,11 @@ function notifyTab(track) {
     cmd: 'update_track',
     track: track
   });
-};
+}
 
 function notifyOptionsView(tracks) {
   chrome.runtime.sendMessage({
     cmd: 'update_option_view',
     tracks: tracks
   });
-};
-
+}

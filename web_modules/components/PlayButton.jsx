@@ -13,28 +13,40 @@ var PlayButton = React.createClass({
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
 
+      console.log('recieving', request.cmd, 'in play-button');
+      console.log(request);
+
       if (request.cmd === 'pause') {
-        that.state.play = false;
+        that.setState({play: false});
+        return;
       }
 
       if (request.cmd === 'play') {
-        that.state.play = true;
+        that.setState({play: true});
+        return;
       }
 
       if (request.cmd === 'update_option_view') {
-        that.props.track = request.track;
+        console.log('it should update track with', request.tracks[0]);
+        console.log(request.tracks);
+        that.setState({track: request.tracks[0]});
       }
 
     });
   },
 
   getInitialState: function() {
-    return {play: false};
+    return {
+      play: this.props.play,
+      track: this.props.track
+    };
   },
 
   handleClick: function () {
-    var track = this.props.track;
+    var track = this.state.track;
     var play = !this.state.play;
+
+    console.log(track);
 
     if (track) {
       chrome.tabs.sendMessage(track.tab, {

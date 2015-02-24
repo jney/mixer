@@ -13,26 +13,32 @@ var Vinyl = React.createClass({
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
 
-      console.log('recieving message in vinyl');
+      console.log('recieving', request.cmd, 'in vinyl');
 
-
-      if(request.cmd === 'pause') {
-        that.state.play = false;
+      if (request.cmd === 'pause') {
+        that.setState({play: false});
+        return;
       }
 
-      if(request.cmd === 'play') {
-        that.state.play = true;
+      if (request.cmd === 'play') {
+        that.setState({play: true});
+        return;
       }
 
-      if(request.cmd === 'update_option_view') {
-        that.props.track = request.track;
+      if (request.cmd === 'update_option_view') {
+        console.log('it should update track with', request.tracks[0]);
+        console.log(request.tracks);
+        that.setState({track: request.tracks[0]});
       }
 
     });
   },
 
   getInitialState: function() {
-    return {play: false};
+    return {
+      play: this.props.play,
+      track: this.props.track
+    };
   },
 
   render: function(){
@@ -41,8 +47,8 @@ var Vinyl = React.createClass({
       'vinyl': true,
       'is-playing': this.state.play,
     });
-    var image = this.props.track &&
-                this.props.track.image ||
+    var image = this.state.track &&
+                this.state.track.image ||
                 chrome.extension.getURL('images/icon48.png');
 
     return (

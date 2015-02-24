@@ -13,19 +13,19 @@ var track;
 var currentId = '';
 
 // wait for dom ready
-$(function () {
+$(function() {
 
   if ($('video').length > 0) {
     player = $('video').get(0);
     // on creation
     // we send an event to the bg with a player
     // and receive a track in return
-    player.addEventListener('canplay', function () {
+    player.addEventListener('canplay', function() {
       console.log('canplay');
       // get player's data
       var dataPlayer = retrieveData(player);
       // if new player, we send an event to the bg
-      if(dataPlayer.id !== currentId){
+      if (dataPlayer.id !== currentId) {
         // set new current id
         currentId = dataPlayer.id;
         player = $('video').get(0);
@@ -38,7 +38,7 @@ $(function () {
     }, false);
 
     // update a track
-    chrome.runtime.onMessage.addListener(function (request) {
+    chrome.runtime.onMessage.addListener(function(request) {
       if (request.cmd === 'update_track') {
         console.log('update a track', request.track);
         track = request.track;
@@ -48,7 +48,7 @@ $(function () {
     });
 
     // on time udate
-    player.addEventListener('timeupdate', function () {
+    player.addEventListener('timeupdate', function() {
       // send an event
     }, false);
 
