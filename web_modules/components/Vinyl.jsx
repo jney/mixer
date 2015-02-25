@@ -1,6 +1,10 @@
+/* jslint node: true */
+/* global chrome: true */
+
 'use strict';
 
 var React = require('react');
+var _ = require('lodash');
 
 require('../../css/components/vinyl.css');
 
@@ -9,11 +13,10 @@ require('../../css/components/vinyl.css');
  * @type {*|Function}
  */
 var Vinyl = React.createClass({
+
   componentDidMount: function() {
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
-
-      console.log('recieving', request.cmd, 'in vinyl');
 
       if (request.cmd === 'pause') {
         that.setState({play: false});
@@ -26,9 +29,8 @@ var Vinyl = React.createClass({
       }
 
       if (request.cmd === 'update_option_view') {
-        console.log('it should update track with', request.tracks[0]);
-        console.log(request.tracks);
-        that.setState({track: request.tracks[0]});
+        that.setState({track: _.last(request.tracks)});
+        return;
       }
 
     });
@@ -36,7 +38,7 @@ var Vinyl = React.createClass({
 
   getInitialState: function() {
     return {
-      play: this.props.play,
+      play: !!this.props.play,
       track: this.props.track
     };
   },
