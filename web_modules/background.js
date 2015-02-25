@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     console.log('player detected', request.player);
 
     // we create a new track in function of the player datas and tab
-    var newTrack = _.extend({}, request.player, {
+    var track = _.extend({}, request.player, {
       tab: sender.tab.id,
       volume: 1,
       currentTime: 0,
@@ -29,9 +29,10 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     });
 
     // send created track to the current tab
-    notifyTab(newTrack);
+    notifyTab(track);
 
     // send the tracks to the options view
+    tracks.push(track);
     notifyOptionsView(tracks);
   }
 });
