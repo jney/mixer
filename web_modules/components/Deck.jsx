@@ -14,17 +14,31 @@ var Deck = React.createClass({
     return (
       <div className='deck'>
         <div className='turn-table'>
-          <Vinyl />
-          <PlayButton />
+          <Vinyl onClick={this.sendToBackground} />
+          <PlayButton onClick={this.sendToBackground} />
         </div>
       </div>
     );
   },
 
+  sendToBackground: function (e) {
+    var track = e.state.track;
+    var play = !e.state.play;
+
+    if (track) {
+      chrome.tabs.sendMessage(track.tab, {
+        cmd: play ? 'play' : 'pause',
+        track: track
+      });
+    }
+
+    e.setState({ play: play });
+  },
+
   setPlay: function (play) {
     this.setState({
       play: play
-      });
+    });
   },
 });
 

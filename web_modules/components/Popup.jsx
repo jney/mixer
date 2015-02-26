@@ -9,7 +9,10 @@ var Popup = React.createClass({
   render: function(){
     return (
       <div>
-        <a href={this.props.link} target="_blank">{this.props.label}</a>
+        <a href={this.props.link}
+           target="_blank">
+          {this.props.label}
+        </a>
       </div>
     );
   }

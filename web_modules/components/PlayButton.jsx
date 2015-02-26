@@ -43,19 +43,7 @@ var PlayButton = React.createClass({
   },
 
   handleClick: function () {
-    var track = this.state.track;
-    var play = !this.state.play;
-
-    console.log(track);
-
-    if (track) {
-      chrome.tabs.sendMessage(track.tab, {
-        cmd: play ? 'play' : 'pause',
-        track: track
-      });
-    }
-
-    this.setState({ play: play });
+    this.props.onClick(this);
   },
 
   render: function(){
@@ -63,7 +51,9 @@ var PlayButton = React.createClass({
 
     return (
       <button className='play-button'
-              onClick={this.handleClick}>{playIcon}</button>
+              onClick={this.handleClick}>
+        {playIcon}
+      </button>
     );
   }
 });
