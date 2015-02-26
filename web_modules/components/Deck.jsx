@@ -10,20 +10,56 @@ var Vinyl = require('./Vinyl');
 require('../../css/components/deck.css');
 
 var Deck = React.createClass({
+
+  componentDidMount: function() {
+    var that = this;
+    chrome.runtime.onMessage.addListener(function (request, sender) {
+
+      console.log('here', arguments)
+
+      if (request.cmd === 'pause') {
+        that.setState({play: false});
+        return;
+      }
+
+      if (request.cmd === 'play') {
+        that.setState({play: true});
+        return;
+      }
+
+      if (request.cmd === 'update_option_view') {
+        that.setState({track: _.last(request.tracks)});
+        return;
+      }
+
+    });
+  },
+
+  getInitialState: function() {
+    return {
+      play: !!this.props.play,
+      track: this.props.track
+    };
+  },
+
   render: function(){
     return (
       <div className='deck'>
         <div className='turn-table'>
-          <Vinyl onClick={this.sendToBackground} />
-          <PlayButton onClick={this.sendToBackground} />
+          <Vinyl onClick={this.sendToBackground}
+                 play={this.state.play}
+                 track={this.state.track} />
+          <PlayButton onClick={this.sendToBackground}
+                      play={this.state.play}
+                      track={this.state.track} />
         </div>
       </div>
     );
   },
 
   sendToBackground: function (e) {
-    var track = e.state.track;
-    var play = !e.state.play;
+    var track = e.props.track;
+    var play = !e.props.play;
 
     if (track) {
       chrome.tabs.sendMessage(track.tab, {
@@ -32,7 +68,7 @@ var Deck = React.createClass({
       });
     }
 
-    e.setState({ play: play });
+    this.setState({ play: play });
   },
 
   setPlay: function (play) {

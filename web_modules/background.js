@@ -13,6 +13,7 @@ chrome.runtime.onInstalled.addListener(function() {
 
 // new player detected
 chrome.runtime.onMessage.addListener(function(request, sender) {
+  console.log('chrome events', arguments);
   if (request.cmd === 'player_detected') {
 
     console.log('player detected', request.player);
@@ -34,12 +35,12 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     // send the tracks to the options view
     tracks.push(track);
     notifyOptionsView(tracks);
+    return;
   }
+
 });
 
 function notifyTab(track) {
-  console.log('tab id', track.tab);
-  console.log('track', track);
   chrome.tabs.sendMessage(track.tab, {
     cmd: 'update_track',
     track: track

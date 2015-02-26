@@ -39,12 +39,20 @@ $(function() {
 
     // update a track
     chrome.runtime.onMessage.addListener(function(request) {
+
       if (request.cmd === 'update_track') {
         console.log('update a track', request.track);
         track = request.track;
         command.execute(track, player);
         console.log('player updated', player);
+        return;
       }
+
+      if (request.cmd === 'play') {
+        playTrack.apply(this, arguments);
+        return;
+      }
+
     });
 
     // on time udate
@@ -54,3 +62,8 @@ $(function() {
 
   }
 });
+
+function playTrack(request) {
+  track.play = true;
+  command.execute(track, player);
+}
