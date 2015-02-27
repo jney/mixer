@@ -6,7 +6,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-require('../../css/components/play-button.css');
+require('css/components/play-button.css');
 
 /**
  * @props track

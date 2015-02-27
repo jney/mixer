@@ -4,8 +4,8 @@
 'use strict';
 
 var React = require('react');
-var Deck = require('components/Deck');
-var Playlist = require('components/Playlist');
+var Deck = require('./Deck');
+var Playlist = require('./Playlist');
 
 module.exports = React.createClass({
   render: function(){

@@ -1,3 +1,5 @@
+/* jslint node: true */
+
 'use strict';
 
 var webpack = require('webpack');
@@ -11,10 +13,10 @@ module.exports = {
   context: path.join(__dirname, 'web_modules'),
   // our different entries
   entry: {
-    'background': 'background',
-    'options': 'options',
-    'content': 'content',
-    'popup': 'popup'
+    'background': 'js/background',
+    'options': 'js/options',
+    'content': 'js/content',
+    'popup': 'js/popup'
   },
   // output configuration
   output: {
@@ -22,11 +24,9 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    // modules dir
     root: [
       path.resolve('node_modules'),
-      path.resolve('web_modules'),
-      path.resolve('sass')
+      path.resolve('src')
     ],
     // allowed extensions
     extensions: ['', '.js', '.jsx', '.css'],

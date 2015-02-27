@@ -7,8 +7,8 @@
 
 'use strict';
 
-var command = require('content/command');
-var retrieveData = require('content/retrieve-data');
+var command = require('js/content/command');
+var retrieveData = require('js/content/retrieve-data');
 
 var currentId = '';
 var player;

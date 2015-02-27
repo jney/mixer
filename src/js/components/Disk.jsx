@@ -6,7 +6,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-require('../../css/components/disk.css');
+require('css/components/disk.css');
 
 /**
  * @props track

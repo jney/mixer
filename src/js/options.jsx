@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var Workspace = require('components/Workspace');
+var Workspace = require('js/components/Workspace');
 
 React.render(
     <Workspace />,

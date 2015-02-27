@@ -8,7 +8,7 @@ var _ = require('lodash');
 var PlayButton = require('./PlayButton');
 var Disk = require('./Disk');
 
-require('../../css/components/deck.css');
+require('css/components/deck.css');
 
 var Deck = React.createClass({
 
