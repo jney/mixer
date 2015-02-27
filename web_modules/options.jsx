@@ -1,18 +1,12 @@
+/* jslint node: true */
+/* global document: true */
+
 'use strict';
 
 var React = require('react');
-
-// components
-var Deck = require('components/Deck');
-var Playlist = require('components/Playlist');
-
+var Workspace = require('components/Workspace');
 
 React.render(
-    <Deck />,
-    document.querySelector('.console')
-);
-
-React.render(
-    <Playlist tracks={[]} />,
-    document.querySelector('.playlist')
+    <Workspace />,
+    document.getElementById('workspace')
 );
