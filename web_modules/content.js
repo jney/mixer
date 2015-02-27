@@ -4,66 +4,64 @@
 
 'use strict';
 
-var $ = require('jquery');
 var command = require('content/command');
 var retrieveData = require('content/retrieve-data');
-
 var player;
 var track;
 var currentId = '';
+var videos = document.getElementsByTagName('video');
 
-// wait for dom ready
-$(function() {
+if (videos.length) {
+  player = videos[0];
+  // on creation
+  // we send an event to the bg with a player
+  // and receive a track in return
+  player.addEventListener('canplay', function() {
+    console.log('canplay');
+    // get player's data
+    var dataPlayer = retrieveData(player);
+    // if new player, we send an event to the bg
+    if (dataPlayer.id !== currentId) {
+      // set new current id
+      currentId = dataPlayer.id;
+      // player = $('video').get(0);
+      // send new player to the server
+      chrome.runtime.sendMessage({
+        cmd: 'player_detected',
+        player: dataPlayer
+      });
+    }
+  }, false);
 
-  if ($('video').length > 0) {
-    player = $('video').get(0);
-    // on creation
-    // we send an event to the bg with a player
-    // and receive a track in return
-    player.addEventListener('canplay', function() {
-      console.log('canplay');
-      // get player's data
-      var dataPlayer = retrieveData(player);
-      // if new player, we send an event to the bg
-      if (dataPlayer.id !== currentId) {
-        // set new current id
-        currentId = dataPlayer.id;
-        player = $('video').get(0);
-        // send new player to the server
-        chrome.runtime.sendMessage({
-          cmd: 'player_detected',
-          player: dataPlayer
-        });
-      }
-    }, false);
+  // update a track
+  chrome.runtime.onMessage.addListener(function(req) {
 
-    // update a track
-    chrome.runtime.onMessage.addListener(function(request) {
+    if (req.cmd === 'update_track') {
+      updateTrack.apply(this, arguments);
+      return;
+    }
 
-      if (request.cmd === 'update_track') {
-        console.log('update a track', request.track);
-        track = request.track;
-        command.execute(track, player);
-        console.log('player updated', player);
-        return;
-      }
+    if (request.cmd === 'play') {
+      playTrack.apply(this, arguments);
+      return;
+    }
 
-      if (request.cmd === 'play') {
-        playTrack.apply(this, arguments);
-        return;
-      }
+  });
 
-    });
+  // on time udate
+  player.addEventListener('timeupdate', function() {
+    // send an event
+  }, false);
 
-    // on time udate
-    player.addEventListener('timeupdate', function() {
-      // send an event
-    }, false);
+}
 
-  }
-});
+function playTrack(req) {
+  console.log(req);
+  // track.play = true;
+  // command.execute(track, player);
+}
 
-function playTrack(request) {
-  track.play = true;
+function updateTrack(req) {
+  track = req.track;
   command.execute(track, player);
 }
