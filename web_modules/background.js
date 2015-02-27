@@ -22,13 +22,13 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
     // we create a new track in function of the player datas and tab
     var track = _.extend({}, request.player, {
-      tab: sender.tab.id,
-      volume: 1,
       currentTime: 0,
       loop: true,
       pause: true,
       play: false,
-      playbackRate: 0
+      playbackRate: 0,
+      tab: sender.tab.id,
+      volume: 1,
     });
 
     // send created track to the current tab

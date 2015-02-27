@@ -9,9 +9,10 @@
 
 var command = require('content/command');
 var retrieveData = require('content/retrieve-data');
+
+var currentId = '';
 var player;
 var track;
-var currentId = '';
 var videos = document.getElementsByTagName('video');
 
 if (videos.length) {
@@ -59,9 +60,8 @@ if (videos.length) {
 }
 
 function playTrack(req) {
-  console.log(req);
-  // track.play = true;
-  // command.execute(track, player);
+  // track = req.track;
+  command.execute(track, player);
 }
 
 function updateTrack(req) {
