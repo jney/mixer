@@ -17,12 +17,12 @@ var Deck = React.createClass({
 
       console.log('here', arguments)
 
-      if (request.cmd === 'pause') {
+      if (request.cmd === 'pause_track') {
         that.setState({play: false});
         return;
       }
 
-      if (request.cmd === 'play') {
+      if (request.cmd === 'play_track') {
         that.setState({play: true});
         return;
       }
@@ -63,7 +63,7 @@ var Deck = React.createClass({
 
     if (track) {
       chrome.tabs.sendMessage(track.tab, {
-        cmd: play ? 'play' : 'pause',
+        cmd: play ? 'play_track' : 'pause_track',
         track: track
       });
     }

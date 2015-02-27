@@ -1,3 +1,6 @@
+/* jslint node: true */
+/* global chrome: true */
+
 'use strict';
 
 var _ = require('lodash');

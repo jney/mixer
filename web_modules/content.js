@@ -2,6 +2,9 @@
  * @see https://developer.mozilla.org/fr/docs/Web/HTML/Utilisation_d%27audio_et_video_en_HTML5
  */
 
+/* jslint node: true */
+/* global chrome: true, document: true */
+
 'use strict';
 
 var command = require('content/command');
@@ -41,7 +44,7 @@ if (videos.length) {
       return;
     }
 
-    if (request.cmd === 'play') {
+    if (req.cmd === 'play_track') {
       playTrack.apply(this, arguments);
       return;
     }
