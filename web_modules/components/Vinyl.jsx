@@ -14,24 +14,28 @@ require('../../css/components/vinyl.css');
  */
 var Vinyl = React.createClass({
 
-  render: function(){
-    var cx = React.addons.classSet;
-    var vinylClasses = cx({
-      'vinyl': true,
-      'is-playing': this.props.play,
-    });
+  imageStyle: function () {
     var image = this.props.track &&
                 this.props.track.image ||
                 chrome.extension.getURL('images/icon48.png');
 
+    return {
+      backgroundImage: 'url(' + image + ')'
+    }
+  },
+
+  render: function(){
+    var vinylClasses = React.addons.classSet({
+      'vinyl': true,
+      'is-playing': this.props.play,
+    });
+
     return (
       <div className={vinylClasses}>
-        <div className='vinyl__grooves'></div>
-        <div className='vinyl__light'></div>
-        <div className='vinyl__light-alt'></div>
-        <div className='vinyl__macaron'>
-          <img className='vinyl__macaron__cover' src={image} />
-        </div>
+        <div className='vinyl__grooves' />
+        <div className='vinyl__light' />
+        <div className='vinyl__light-alt' />
+        <div className='vinyl__macaron' style={this.imageStyle()} />
       </div>
     );
   }
