@@ -4,8 +4,9 @@
 'use strict';
 
 var React = require('react');
+var _ = require('lodash');
 var PlayButton = require('./PlayButton');
-var Vinyl = require('./Vinyl');
+var Disk = require('./Disk');
 
 require('../../css/components/deck.css');
 
@@ -15,7 +16,6 @@ var Deck = React.createClass({
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
 
-      console.log('here', arguments)
 
       if (request.cmd === 'pause_track') {
         that.setState({play: false});
@@ -46,9 +46,9 @@ var Deck = React.createClass({
     return (
       <div className='deck'>
         <div className='turn-table'>
-          <Vinyl onClick={this.sendToBackground}
-                 play={this.state.play}
-                 track={this.state.track} />
+          <Disk onClick={this.sendToBackground}
+                play={this.state.play}
+                track={this.state.track} />
           <PlayButton onClick={this.sendToBackground}
                       play={this.state.play}
                       track={this.state.track} />

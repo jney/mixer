@@ -1,4 +1,4 @@
-.vinyl {
+.disk {
   background-color: #040504;
   border-radius: 50%;
   box-shadow: 1px 1px 10px #000;
@@ -10,8 +10,8 @@
   width: 400px;
 }
 
-.vinyl__light,
-.vinyl__light-alt {
+.disk__light,
+.disk__light-alt {
   animation: reflection 20s infinite ease-in-out;
   border-radius: 50%;
   bottom: 0;
@@ -22,15 +22,15 @@
   z-index: 5;
 }
 
-.vinyl__light {
+.disk__light {
   background-image: linear-gradient(top, transparent, rgba(255,255,255,0.3), transparent);
 }
 
-.vinyl__light-alt {
+.disk__light-alt {
   background-image: linear-gradient(-160deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
 }
 
-.vinyl__macaron {
+.disk__macaron {
   background: #000;
   background-size: cover;
   background-position: center;
@@ -45,7 +45,7 @@
   z-index: 10;
 }
 
-.vinyl__macaron:after {
+.disk__macaron:after {
   background: white;
   border-radius: 50%;
   box-shadow: inset 0 0 2px #000;
@@ -60,7 +60,7 @@
   z-index: 6;
 }
 
-.vinyl__grooves {
+.disk__grooves {
   background-image: radial-gradient(center center, circle closest-side, transparent 43%, transparent 53%,
     #000 54%, transparent 54%, transparent 64%,
     #000 65%, transparent 65%, transparent 75%,
@@ -82,14 +82,14 @@
   z-index: 5;
 }
 
-.vinyl__grooves,
-.vinyl__macaron {
+.disk__grooves,
+.disk__macaron {
   animation: rotation 3s infinite linear;
   animation-play-state: paused;
 }
 
-.is-playing .vinyl__grooves,
-.is-playing .vinyl__macaron {
+.is-playing .disk__grooves,
+.is-playing .disk__macaron {
   animation-play-state: running;
 }
 

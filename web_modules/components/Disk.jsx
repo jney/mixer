@@ -6,13 +6,13 @@
 var React = require('react');
 var _ = require('lodash');
 
-require('../../css/components/vinyl.css');
+require('../../css/components/disk.css');
 
 /**
  * @props track
  * @type {*|Function}
  */
-var Vinyl = React.createClass({
+ module.exports = React.createClass({
 
   imageStyle: function () {
     var image = this.props.track &&
@@ -21,24 +21,22 @@ var Vinyl = React.createClass({
 
     return {
       backgroundImage: 'url(' + image + ')'
-    }
+    };
   },
 
   render: function(){
-    var vinylClasses = React.addons.classSet({
-      'vinyl': true,
+    var diskClasses = React.addons.classSet({
+      'disk': true,
       'is-playing': this.props.play,
     });
 
     return (
-      <div className={vinylClasses}>
-        <div className='vinyl__grooves' />
-        <div className='vinyl__light' />
-        <div className='vinyl__light-alt' />
-        <div className='vinyl__macaron' style={this.imageStyle()} />
+      <div className={diskClasses}>
+        <div className='disk__grooves' />
+        <div className='disk__light' />
+        <div className='disk__light-alt' />
+        <div className='disk__macaron' style={this.imageStyle()} />
       </div>
     );
   }
 });
-
-module.exports = Vinyl;
