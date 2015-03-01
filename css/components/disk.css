@@ -2,12 +2,14 @@
   background-color: #040504;
   border-radius: 50%;
   box-shadow: 1px 1px 10px #000;
-  display: inline-block;
   height: 400px;
   margin: 50px 50px 0;
-  overflow: hidden;
   position: relative;
   width: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .disk__light,
@@ -31,33 +33,47 @@
 }
 
 .disk__macaron {
-  background: #000;
-  background-size: cover;
-  background-position: center;
   border-radius: 50%;
   height: 33.33%;
-  left: 50%;
-  margin: -16% 0 0 -16%;
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
+  position: relative;
   width: 33.33%;
+}
+
+.disk__macaron__picture,
+.disk__macaron__play-button {
+  background-color: #000;
+  border-radius: 50%;
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.disk__macaron__picture {
+  background-size: cover;
+  background-position: center;
   z-index: 10;
 }
 
-.disk__macaron:after {
-  background: white;
-  border-radius: 50%;
-  box-shadow: inset 0 0 2px #000;
-  content: '';
-  display: block;
-  height: 8%;
-  left: 50%;
-  margin: -4% 0 0 -4%;
-  position: absolute;
-  top: 50%;
-  width: 8%;
-  z-index: 6;
+.disk__macaron__play-button {
+  color: #fff;
+  font-size: 5em;
+  line-height: 2em;
+  opacity: 0;
+  overflow: hidden;
+  text-align:center;
+  transition: all 2s ease;
+  z-index: 11;
+}
+
+.disk__macaron__play-button:hover {
+  background-color: rgba(0,0,0,.8);
+  opacity: 1;
+  transition: all 0;
+}
+
+.disk__macaron__play-button:active {
+  animation: hide 3s;
 }
 
 .disk__grooves {
@@ -83,19 +99,25 @@
 }
 
 .disk__grooves,
-.disk__macaron {
+.disk__macaron__picture {
   animation: rotation 3s infinite linear;
   animation-play-state: paused;
 }
 
 .is-playing .disk__grooves,
-.is-playing .disk__macaron {
+.is-playing .disk__macaron__picture {
   animation-play-state: running;
 }
 
-@keyframes rotation {
-  0%   { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+@keyframes hide {
+  0%   {
+    background-color: rgba(0,0,0,.8);
+    opacity: 1;
+  }
+  100% {
+    background-color: #000;
+    opacity: 0;
+  }
 }
 
 @keyframes reflection {
@@ -104,4 +126,9 @@
   50%  { filter: blur(10px); transform: rotate(0); }
   75%  { transform: rotate(-5deg); }
   100% { filter: blur(5px); transform: rotate(0); }
+}
+
+@keyframes rotation {
+  0%   { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
 }

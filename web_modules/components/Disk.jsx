@@ -14,6 +14,14 @@ require('../../css/components/disk.css');
  */
  module.exports = React.createClass({
 
+  getPlayIcon: function () {
+    return this.props.play ? '▷' : '▯▯';
+  },
+
+  handleClick: function () {
+    this.props.onClick(this);
+  },
+
   imageStyle: function () {
     var image = this.props.track &&
                 this.props.track.image ||
@@ -35,7 +43,12 @@ require('../../css/components/disk.css');
         <div className='disk__grooves' />
         <div className='disk__light' />
         <div className='disk__light-alt' />
-        <div className='disk__macaron' style={this.imageStyle()} />
+        <div className='disk__macaron'>
+          <div className='disk__macaron__picture' style={this.imageStyle()} />
+          <div className='disk__macaron__play-button' onClick={this.handleClick}>
+            {this.getPlayIcon()}
+          </div>
+        </div>
       </div>
     );
   }

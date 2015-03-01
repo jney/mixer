@@ -5,7 +5,6 @@
 
 var React = require('react');
 var _ = require('lodash');
-var PlayButton = require('./PlayButton');
 var Disk = require('./Disk');
 
 require('../../css/components/deck.css');
@@ -49,9 +48,6 @@ var Deck = React.createClass({
           <Disk onClick={this.sendToBackground}
                 play={this.state.play}
                 track={this.state.track} />
-          <PlayButton onClick={this.sendToBackground}
-                      play={this.state.play}
-                      track={this.state.track} />
         </div>
       </div>
     );
