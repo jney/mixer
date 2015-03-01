@@ -36,6 +36,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
     // send the tracks to the options view
     tracks.push(track);
+    tracks = _.uniq(tracks, 'id');
+
     notifyOptionsView(tracks);
     return;
   }
