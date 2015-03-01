@@ -32,6 +32,10 @@ require('../../css/components/disk.css');
     };
   },
 
+  onDrop: function () {
+    console.log(arguments);
+  },
+
   render: function(){
     var diskClasses = React.addons.classSet({
       'disk': true,
@@ -39,7 +43,8 @@ require('../../css/components/disk.css');
     });
 
     return (
-      <div className={diskClasses}>
+      <div className={diskClasses}
+           onDrop={this.onDrop}>
         <div className='disk__grooves' />
         <div className='disk__light' />
         <div className='disk__light-alt' />

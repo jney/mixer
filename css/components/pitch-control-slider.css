@@ -1,0 +1,16 @@
+.pitch-control-slider {
+  -webkit-appearance: slider-vertical;
+  flex: 1;
+  height: 200px;
+  margin-left: 20px;
+  width: 8px;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #666;
+  opacity: 0.5;
+  width: 10px;
+  height: 26px;
+}

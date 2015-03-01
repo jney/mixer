@@ -6,6 +6,7 @@
 var React = require('react');
 var _ = require('lodash');
 var Disk = require('./Disk');
+var PitchControlSlider = require('./PitchControlSlider');
 
 require('../../css/components/deck.css');
 
@@ -14,7 +15,6 @@ var Deck = React.createClass({
   componentDidMount: function() {
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
-
 
       if (request.cmd === 'pause_track') {
         that.setState({play: false});
@@ -44,11 +44,10 @@ var Deck = React.createClass({
   render: function(){
     return (
       <div className='deck'>
-        <div className='turn-table'>
-          <Disk onClick={this.sendToBackground}
-                play={this.state.play}
-                track={this.state.track} />
-        </div>
+        <Disk onClick={this.sendToBackground}
+              play={this.state.play}
+              track={this.state.track} />
+        <PitchControlSlider />
       </div>
     );
   },

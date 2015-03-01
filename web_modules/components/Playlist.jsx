@@ -25,14 +25,36 @@ var Playlist = React.createClass({
     };
   },
 
+  getTrackTag: function (track) {
+    return (
+      <li draggable={true}
+          onDragStart={this.onDragStart}
+          onDragEnd={this.onDragEnd}
+          onDrop={this.onDrop}>
+        {JSON.stringify(track)}
+      </li>
+    );
+  },
+
+  onDragEnd: function () {
+    console.log(arguments);
+  },
+  
+  onDragStart: function () {
+    console.log(arguments);
+  },
+
+  onDrop: function () {
+    console.log(arguments);
+  },
+
   render: function(){
     return (
       <ul>
         my playlist
-        {
-          this.state.tracks.map(function (track) {
-            return <li>{JSON.stringify(track)}</li>;
-          })
+        { this.state.tracks.map(function (track) {
+            return this.getTrackTag(track);
+          }, this)
         }
       </ul>
     );
