@@ -7,7 +7,7 @@ var React = require('react');
 
 var Playlist = React.createClass({
 
-    componentDidMount: function() {
+  componentDidMount: function() {
     var that = this;
     chrome.runtime.onMessage.addListener(function (request, sender) {
 
@@ -39,7 +39,7 @@ var Playlist = React.createClass({
   onDragEnd: function () {
     console.log(arguments);
   },
-  
+
   onDragStart: function () {
     console.log(arguments);
   },

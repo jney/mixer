@@ -19,7 +19,7 @@ require('../../css/components/disk.css');
   },
 
   handleClick: function () {
-    this.props.onClick(this);
+    this.props.onClick(!this.props.play);
   },
 
   imageStyle: function () {

@@ -36,34 +36,42 @@ var Deck = React.createClass({
 
   getInitialState: function() {
     return {
-      play: !!this.props.play,
-      track: this.props.track
+      play  : !!this.props.play,
+      speed : this.props.speed || 0,
+      track : this.props.track,
     };
   },
 
   render: function(){
     return (
       <div className='deck'>
-        <Disk onClick={this.sendToBackground}
+        <Disk onClick={this.sendPlay}
               play={this.state.play}
               track={this.state.track} />
-        <PitchControlSlider />
+        <PitchControlSlider onChange={this.sendSpeed}
+                            track={this.state.track} />
       </div>
     );
   },
 
-  sendToBackground: function (e) {
-    var track = e.props.track;
-    var play = !e.props.play;
+  sendPlay: function (play) {
+    var track = this.state.track;
 
     if (track) {
-      chrome.tabs.sendMessage(track.tab, {
-        cmd: play ? 'play_track' : 'pause_track',
-        track: track
-      });
+      chrome.tabs.sendMessage(track.tab, { play: play });
     }
 
     this.setState({ play: play });
+  },
+
+  sendSpeed: function (speed) {
+    var track = this.state.track;
+
+    if (track) {
+      chrome.tabs.sendMessage(track.tab, { speed: speed });
+    }
+
+    this.setState({ speed: speed });
   },
 
   setPlay: function (play) {

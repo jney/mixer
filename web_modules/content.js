@@ -38,18 +38,29 @@ if (videos.length) {
   }, false);
 
   // update a track
-  chrome.runtime.onMessage.addListener(function(req) {
+  chrome.runtime.onMessage.addListener(function(msg) {
 
-    if (req.cmd === 'update_track') {
-      updateTrack.apply(this, arguments);
+    console.log('req', msg);
+
+    if (msg.cmd === 'update_track') {
+      // updateTrack.apply(this, arguments);
+      player.pause();
       return;
     }
 
-    if (req.cmd === 'play_track') {
-      playTrack.apply(this, arguments);
+    if (msg.play === true) {
+      player.play();
       return;
     }
 
+    if (msg.play === false) {
+      player.pause();
+      return;
+    }
+
+    if ('speed' in msg) {
+      player.playbackRate = msg.speed;
+    }
   });
 
   // on time udate
