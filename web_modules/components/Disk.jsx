@@ -50,7 +50,8 @@ require('../../css/components/disk.css');
         <div className='disk__light-alt' />
         <div className='disk__macaron'>
           <div className='disk__macaron__picture' style={this.imageStyle()} />
-          <div className='disk__macaron__play-button' onClick={this.handleClick}>
+          <div className='disk__macaron__play-button'
+               onClick={this.handleClick}>
             {this.getPlayIcon()}
           </div>
         </div>

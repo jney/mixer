@@ -48,18 +48,21 @@ if (videos.length) {
       return;
     }
 
-    if (msg.play === true) {
-      player.play();
-      return;
-    }
 
-    if (msg.play === false) {
-      player.pause();
-      return;
-    }
+    if ('player' in msg) {
+      if (msg.player.play === true) {
+        player.play();
+        return;
+      }
 
-    if ('speed' in msg) {
-      player.playbackRate = msg.speed;
+      if (msg.player.play === false) {
+        player.pause();
+        return;
+      }
+
+      if ('speed' in msg.player) {
+        player.playbackRate = msg.player.speed;
+      }
     }
   });
 
