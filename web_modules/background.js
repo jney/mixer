@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       play: false,
       playbackRate: 0,
       tab: sender.tab.id,
-      volume: 1,
+      volume: 1
     });
 
     // send created track to the current tab
