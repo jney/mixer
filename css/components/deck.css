@@ -1,8 +1,15 @@
 .deck {
   align-items: center;
   border: 1px solid #ddd;
-  box-shadow: 1px 1px 10px #ddd;
+  border-left-color: #bbb;
+  border-top-color: #bbb;
+  box-shadow: 1px 1px 5px #999;
   display: flex;
-  padding: 20px;
-  width: 450px;
+  padding: 20px 10px 20px 20px;
+  width: 440px;
+
+  background-image: linear-gradient(-150deg, hsl(0,0%,78%)  0%,
+                                             hsl(0,0%,90%) 47%,
+                                             hsl(0,0%,78%) 53%,
+                                             hsl(0,0%,70%)100%);
 }

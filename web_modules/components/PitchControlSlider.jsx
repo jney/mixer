@@ -25,8 +25,8 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <input className='pitch-control-slider'
+      <div className='pitch-control'>
+        <input className='pitch-control__slider'
                onChange={this.handleChange}
                max='100'
                min='-100'
