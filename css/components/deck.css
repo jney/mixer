@@ -1,4 +1,8 @@
 .deck {
-  display: flex;
   align-items: center;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 10px #ddd;
+  display: flex;
+  padding: 20px;
+  width: 450px;
 }
