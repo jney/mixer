@@ -15,12 +15,14 @@ then, in chrome://extensions, load *mixer/chrome_extension* directory
 
 ## Datastore
 
-#### example
+### example
 
+```
 {
   tracks : [],
   players: []
 }
+```
 
 ### track element
 
