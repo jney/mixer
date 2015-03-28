@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": 1
+  },
+
+  "globals": {
+    "chrome": 1,
+    "document": 1
+  },
+
+  "rules": {
+    "quotes": [2, "single"],
+    "no-undef": 2,
+    "no-use-before-define": "nofunc",
+    "strict": [2, "global"],
+  }
+}
