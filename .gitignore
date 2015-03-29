@@ -28,3 +28,5 @@ node_modules
 .lock-wscript
 
 chrome_extension/js
+
+.idea
