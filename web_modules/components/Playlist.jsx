@@ -5,6 +5,9 @@
 
 var React = require('react');
 
+var ALLOWED_DROP_EFFECT = 'move';
+var DRAG_DROP_CONTENT_TYPE = 'custom_container_type';
+
 var Playlist = React.createClass({
 
   componentDidMount: function() {
@@ -28,20 +31,30 @@ var Playlist = React.createClass({
   getTrackTag: function (track) {
     return (
       <li draggable={true}
+          data-id={track.id}
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
           onDrop={this.onDrop}>
+        <span onClick={this.setTrackFn('left')}>◀</span>
         {JSON.stringify(track)}
+        <span onClick={this.setTrackFn('left')}>▶</span>
       </li>
     );
   },
 
-  onDragEnd: function () {
-    console.log(arguments);
+  onDragEnd: function (e) {
+    console.log('onDragEnd', arguments);
+    console.log('onDragEnd', e.currentTarget);
   },
 
-  onDragStart: function () {
-    console.log(arguments);
+  onDragStart: function (e) {
+    console.log('onDragStart', e.currentTarget.dataset);
+
+    var trackId = e.currentTarget.dataset.id;
+    e.dataTransfer.effectAllowed = ALLOWED_DROP_EFFECT;
+    e.dataTransfer.setData(DRAG_DROP_CONTENT_TYPE, trackId);
+
+    // this.setState({ selected: selectedIndex });
   },
 
   onDrop: function () {
@@ -51,14 +64,27 @@ var Playlist = React.createClass({
   render: function(){
     return (
       <ul>
-        my playlist
+        <li draggable={true}
+            data-id={this.props.id}
+            onDragStart={this.onDragStart}
+            onDragEnd={this.onDragEnd}
+            onDrop={this.onDrop}>
+        </li>
         { this.state.tracks.map(function (track) {
             return this.getTrackTag(track);
           }, this)
         }
       </ul>
     );
+  },
+
+  setTrackFn: function (player) {
+    return function (e) {
+      var trackId = e.currentTarget.parentNode.dataset.id;
+      // player.trackId = trackId;
+    };
   }
+
 });
 
 module.exports = Playlist;

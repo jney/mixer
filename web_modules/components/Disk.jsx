@@ -12,19 +12,22 @@ require('../../css/components/disk.css');
  * @props track
  * @type {*|Function}
  */
- module.exports = React.createClass({
+
+module.exports = React.createClass({
 
   getPlayIcon: function () {
-    return this.props.play ? '▷' : '▯▯';
+    return this.props.player.play ? '▷' : '▯▯';
   },
 
   handleClick: function () {
-    this.props.onClick(!this.props.play);
+    var player = _.assign(this.props.player, { play: !this.props.player.play });
+    this.props.update({ player: player });
   },
 
   imageStyle: function () {
-    var image = this.props.track &&
-                this.props.track.image ||
+    var player = this.props.player;
+    var image = player.track &&
+                player.track.image ||
                 chrome.extension.getURL('images/icon48.png');
 
     return {
@@ -32,19 +35,14 @@ require('../../css/components/disk.css');
     };
   },
 
-  onDrop: function () {
-    console.log(arguments);
-  },
-
-  render: function(){
+  render: function() {
     var diskClasses = React.addons.classSet({
       'disk': true,
-      'is-playing': this.props.play,
+      'is-playing': this.props.player.play,
     });
 
     return (
-      <div className={diskClasses}
-           onDrop={this.onDrop}>
+      <div className={diskClasses}>
         <div className='disk__grooves' />
         <div className='disk__light' />
         <div className='disk__light-alt' />

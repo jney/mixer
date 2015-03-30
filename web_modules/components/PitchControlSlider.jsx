@@ -19,7 +19,6 @@ module.exports = React.createClass({
 
   handleChange: function (e) {
     var speed = this.calculateSpeed(e.target.value);
-    console.log(speed);
     this.props.onChange(speed);
   },
 
