@@ -35,8 +35,8 @@ then, in chrome://extensions, load *mixer/chrome_extension* directory
 
 * id
 * play : boolean, default false
-* trackId
-* volume : float, in 0..1
+* track
+* volume : float, in 0..1, default 1
 * loop : boolean, default false
 * play : boolean, default false
 * playbackRate : float, in 0..+Infinite, default 1
