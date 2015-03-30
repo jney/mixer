@@ -9,7 +9,7 @@ var defaults = {
   play: false,
   playbackRate: 1,
   quality: 1,
-  volume: 1,
+  volume: 1
 };
 
 function Player(p) {
@@ -17,21 +17,17 @@ function Player(p) {
 
   switch (typeof p) {
     case 'object':
-      this.id = p.id || _.uniqueId();
       player = p;
+      player.id = p.id || _.uniqueId();
       break;
     case 'undefined':
-      this.id = _.uniqueId();
+      player.id = _.uniqueId();
       break;
     default:
-      this.id = p;
+      player.id = p;
   }
 
-  this.loop = player.loop || defaults.loop;
-  this.play = player.play || defaults.play;
-  this.playbackRate = player.playbackRate || defaults.playbackRate;
-  this.quality = player.quality || defaults.quality;
-  this.volume = player.volume || defaults.volume;
+  return _.defaults(player, defaults);
 }
 
 module.exports = Player;
