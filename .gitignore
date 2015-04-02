@@ -30,3 +30,4 @@ node_modules
 chrome_extension/js
 
 .idea
+.tern-port
