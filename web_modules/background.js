@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       pause: true,
       play: false,
       playbackRate: 0,
-      tab: sender.tab.id,
+      tabId: sender.tab.id,
       volume: 1
     });
 
@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
   if ('player' in request) {
     if ('track' in request.player) {
       // send track to tab
-      chrome.tabs.sendMessage(request.player.track.tab, {
+      chrome.tabs.sendMessage(request.player.track.tabId, {
         cmd: 'update_track',
         track: request.player.track
       });
@@ -54,7 +54,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 });
 
 function notifyTab(track) {
-  chrome.tabs.sendMessage(track.tab, {
+  chrome.tabs.sendMessage(track.tabId, {
     cmd: 'update_track',
     track: track
   });

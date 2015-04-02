@@ -42,7 +42,7 @@ var Deck = React.createClass({
     var track = this.state.track;
 
     if (track) {
-      chrome.tabs.sendMessage(track.tab, { player: { play: play }});
+      chrome.tabs.sendMessage(track.tabId, { player: { play: play }});
     }
 
     this.setState({ play: play });
@@ -52,7 +52,7 @@ var Deck = React.createClass({
     var track = this.state.track;
 
     if (track) {
-      chrome.tabs.sendMessage(track.tab, { player: { speed: speed }});
+      chrome.tabs.sendMessage(track.tabId, { player: { speed: speed }});
     }
 
     this.setState({ speed: speed });

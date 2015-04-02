@@ -7,12 +7,9 @@
 
 'use strict';
 
-var command = require('content/command');
-var retrieveData = require('content/retrieve-data');
-
 var currentId = '';
 var player;
-var track;
+var retrieveData = require('content/retrieve-data');
 var videos = document.getElementsByTagName('video');
 
 if (videos.length) {
@@ -48,7 +45,6 @@ if (videos.length) {
       return;
     }
 
-
     if ('player' in msg) {
       if (msg.player.play === true) {
         player.play();
@@ -71,14 +67,4 @@ if (videos.length) {
     // send an event
   }, false);
 
-}
-
-function playTrack(req) {
-  // track = req.track;
-  command.execute(track, player);
-}
-
-function updateTrack(req) {
-  track = req.track;
-  command.execute(track, player);
 }
