@@ -33,7 +33,10 @@ module.exports = React.createClass({
       if (request.cmd === 'update_option_view') {
         var player = this.state.leftPlayer;
         player.track = _.last(request.tracks);
-        this.setState({leftPlayer: player});
+        this.setState({
+          leftPlayer: player,
+          tracks: request.tracks
+        });
         return;
       }
 
@@ -65,6 +68,7 @@ module.exports = React.createClass({
           player={this.state.rightPlayer}
           update={this.update} />
         <Playlist
+          player={[ this.state.leftPlayer, this.state.rightPlayer ]}
           tracks={this.state.tracks}
           update={this.update} />
       </div>
