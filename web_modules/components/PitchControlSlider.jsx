@@ -4,22 +4,30 @@
 'use strict';
 
 var React = require('react');
+var _ = require('lodash');
 
 require('../../css/components/pitch-control-slider.css');
 
-module.exports = React.createClass({
-  calculateSpeed: function (v) {
-    v = parseInt(v);
-    if (v < 0) {
-      return 1 + (v/200);
-    } else {
-      return 1 + (v/100);
-    }
-  },
+function rateToSpeed(r) {
+  // body...
+}
 
+function speedToRate(s) {
+  s = parseInt(s);
+  if (s < 0) {
+    return 1 + (s/200);
+  } else {
+    return 1 + (s/100);
+  }
+}
+
+module.exports = React.createClass({
   handleChange: function (e) {
-    var speed = this.calculateSpeed(e.target.value);
-    this.props.onChange(speed);
+    var player = _.assign(
+      this.props.player,
+      { playbackRate: speedToRate(e.target.value) }
+    );
+    this.props.update({ player: player });
   },
 
   render: function () {

@@ -20,7 +20,10 @@ module.exports = React.createClass({
   },
 
   handleClick: function () {
-    var player = _.assign(this.props.player, { play: !this.props.player.play });
+    var player = _.assign(
+      this.props.player,
+      { play: !this.props.player.play }
+    );
     this.props.update({ player: player });
   },
 

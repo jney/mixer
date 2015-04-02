@@ -12,7 +12,7 @@ require('../../css/components/deck.css');
 
 var Deck = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       play  : !!this.props.play,
       speed : this.props.speed || 0,
@@ -24,7 +24,7 @@ var Deck = React.createClass({
     console.log('onDrop', arguments);
   },
 
-  render: function(){
+  render: function () {
     return (
       <div className='deck'>
         <Disk onClick={this.sendPlay}
@@ -38,31 +38,14 @@ var Deck = React.createClass({
     );
   },
 
-  sendPlay: function (play) {
-    var track = this.state.track;
-
-    if (track) {
-      chrome.tabs.sendMessage(track.tabId, { player: { play: play }});
-    }
-
-    this.setState({ play: play });
+  sendPlay: function () {
+    var player = _.assign(
+      this.props.player,
+      { play: !this.props.player.play }
+    );
+    this.props.update({ player: player });
   },
 
-  sendSpeed: function (speed) {
-    var track = this.state.track;
-
-    if (track) {
-      chrome.tabs.sendMessage(track.tabId, { player: { speed: speed }});
-    }
-
-    this.setState({ speed: speed });
-  },
-
-  setPlay: function (play) {
-    this.setState({
-      play: play
-    });
-  },
 });
 
 module.exports = Deck;
