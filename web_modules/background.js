@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(function() {
 
 // new player detected
 chrome.runtime.onMessage.addListener(function(request, sender) {
-  console.log('chrome events', arguments);
+  console.log('chrome events', request, sender);
   if (request.cmd === 'player_detected') {
 
     console.log('player detected', request.player);
@@ -42,6 +42,15 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     return;
   }
 
+  if ('player' in request) {
+    if ('track' in request.player) {
+      // send track to tab
+      chrome.tabs.sendMessage(request.player.track.tab, {
+        cmd: 'update_track',
+        track: request.player.track
+      });
+    }
+  }
 });
 
 function notifyTab(track) {
@@ -51,9 +60,9 @@ function notifyTab(track) {
   });
 }
 
-function notifyOptionsView(tracks) {
+function notifyOptionsView(t) {
   chrome.runtime.sendMessage({
     cmd: 'update_option_view',
-    tracks: tracks
+    tracks: t
   });
 }
