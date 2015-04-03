@@ -33,17 +33,13 @@ var Playlist = React.createClass({
   render: function(){
     return (
       <ul>
-        <li draggable={true}
-            data-id={this.props.id}
-            onDragStart={this.onDragStart}
-            onDragEnd={this.onDragEnd}
-            onDrop={this.onDrop}>
-        </li>
         { this.props.tracks.map(function (track) {
+            console.log('waza');
             return (
               <PlaylistElement
-                players={this.props.player}
-                track={track} />
+                players={this.props.players}
+                track={track}
+                update={this.props.update} />
             )
           }, this)
         }

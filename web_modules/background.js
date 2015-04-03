@@ -4,41 +4,31 @@
 'use strict';
 
 var _ = require('lodash');
+var Track = require('objects/Track');
 
 var tracks = [];
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function() {
+  // TODO
+  // Get tracks from stored data
+  console.log('Cylon installed');
   tracks = [];
-  console.log('on installed');
 });
 
 // new player detected
 chrome.runtime.onMessage.addListener(function(request, sender) {
   console.log('chrome events', request, sender);
-  if (request.cmd === 'player_detected') {
-
-    console.log('player detected', request.player);
-
-    // we create a new track in function of the player datas and tab
-    var track = _.extend({}, request.player, {
-      currentTime: 0,
-      loop: true,
-      pause: true,
-      play: false,
-      playbackRate: 0,
-      tabId: sender.tab.id,
-      volume: 1
-    });
-
-    // send created track to the current tab
-    notifyTab(track);
+  if ('track' in request) {
 
     // send the tracks to the options view
-    tracks.push(track);
-    tracks = _.uniq(tracks, 'id');
+    tracks.push(request.track);
 
-    notifyOptionsView(tracks);
+    chrome.runtime.sendMessage({
+      from: 'background',
+      tracks: tracks
+    });
+
     return;
   }
 
@@ -52,17 +42,3 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
   }
 });
-
-function notifyTab(track) {
-  chrome.tabs.sendMessage(track.tabId, {
-    cmd: 'update_track',
-    track: track
-  });
-}
-
-function notifyOptionsView(t) {
-  chrome.runtime.sendMessage({
-    cmd: 'update_option_view',
-    tracks: t
-  });
-}

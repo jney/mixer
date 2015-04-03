@@ -19,27 +19,11 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     chrome.runtime.onMessage.addListener(function (request, sender) {
-
-      if (request.cmd === 'pause_track') {
-        this.setState({play: false});
-        return;
+      // TODO
+      if ('tracks' in request) {
+        console.log('should update tracks with', request.tracks);
+        this.setState({ tracks: request.tracks });
       }
-
-      if (request.cmd === 'play_track') {
-        this.setState({play: true});
-        return;
-      }
-
-      if (request.cmd === 'update_option_view') {
-        var player = this.state.leftPlayer;
-        player.track = _.last(request.tracks);
-        this.setState({
-          leftPlayer: player,
-          tracks: request.tracks
-        });
-        return;
-      }
-
     }.bind(this));
   },
 
@@ -68,7 +52,7 @@ module.exports = React.createClass({
           player={this.state.rightPlayer}
           update={this.update} />
         <Playlist
-          player={[ this.state.leftPlayer, this.state.rightPlayer ]}
+          players={[ this.state.leftPlayer, this.state.rightPlayer ]}
           tracks={this.state.tracks}
           update={this.update} />
       </div>
@@ -81,7 +65,7 @@ module.exports = React.createClass({
   // update a player :
   // { player: playerObject }
   update: function (d) {
-    console.log(d);
+    d.from = 'client';
     chrome.runtime.sendMessage(d);
   },
 });

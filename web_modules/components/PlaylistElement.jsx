@@ -8,29 +8,27 @@ var React = require('react');
 var ALLOWED_DROP_EFFECT = 'move';
 var DRAG_DROP_CONTENT_TYPE = 'custom_container_type';
 
-var Playlist = React.createClass({
-  render: function (track) {
+var PlaylistElement = React.createClass({
+  render: function () {
     return (
-      <li draggable={true}
-          data-id={track.id}
-          onDragStart={this.onDragStart}
-          onDragEnd={this.onDragEnd}
-          onDrop={this.onDrop}>
-        <span onClick={this.setTrackFn(this.props.players[0])}>
-          ◀
+      <li>
+        <span onClick={this.addToPlayer(this.props.players[0])}>
+          add left
         </span>
-        {JSON.stringify(track)}
-        <span onClick={this.setTrackFn(this.props.players[1])}>
-          ▶
+        {this.props.track.name}
+        <span onClick={this.addToPlayer(this.props.players[1])}>
+          add right
         </span>
       </li>
     );
   },
 
-  setTrackFn: function (player) {
+  addToPlayer: function (player) {
     return function (e) {
       var trackId = e.currentTarget.parentNode.dataset.id;
       // player.trackId = trackId;
     };
   }
 });
+
+module.exports = PlaylistElement;
