@@ -26,10 +26,12 @@ then, in chrome://extensions, load *mixer/chrome_extension* directory
 
 ### track element
 
+* duration : integer, default 0
 * id : unique id
+* image : string
+* name : string, default page title
 * tabId : chrome tab identifier
 * url : string
-* image : string
 
 ### player element
 
